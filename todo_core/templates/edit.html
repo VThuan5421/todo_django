@@ -1,0 +1,38 @@
+{% extends  'base.html' %}
+{% load static %}
+{% block title %}Edit task - Todo{% endblock %}
+{% block body %}
+<div class = "container main-body">
+    <div class = "card">
+        <div class = "top-part">
+            <div class = "day">
+                <h5 class = "setdate">Sunday, December 25</h5>
+                <h6 class = "settime">--</h6>
+            </div>
+            <div class = "tasks">
+                <h6>
+                    Have a nice day&nbsp;&nbsp;
+                    <i style = "font-size: 20px;" class="fas fa-smile-beam"></i>
+                </h6>
+            </div>
+        </div>
+        <form method = "POST">
+            {% csrf_token %}
+            <div class = "addtask">
+                <textarea name = "title">{{task.title}}</textarea>
+                {% if user.is_authenticated %}
+                <button class = "btn btn-submit">Edit task</button>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+<script src = "/static/js/script.js"></script>
+<script>
+    {% if alert %}
+    document.location = "/";
+    {% endif %}
+</script>
+{% endblock %}

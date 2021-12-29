@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.0-2/css/bootstrap-grid.min.css" integrity="sha512-NyrvF94auQJYFbBZNKiGXkBCzJoXcpLhVBlMUyUfyDvNwMiB6l5XLBAw+wNFyAg0Jr++YMt7bHAOrRt37/lLDA==" crossorigin="anonymous"
+        referrerpolicy="no-referrer" />-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <!--google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,400;1,500&display=swap" rel="stylesheet">
+    <!-- end google font-->
+    <title>{% block title %}{% endblock %}</title>
+    {% block css %}
+    {% endblock %}
+    <link rel = "stylesheet" href = "/static/css/style.css">
+</head>
+<body>
+<header class = "header">
+    <div class = "container-fluid">
+        <div class = "header-content">
+            <div class = "header-left">
+                <div class = "main-logo">
+                    <a class = "logo" href = "/">Todo</a>
+                </div>
+            </div>
+            <div class = "header-right">
+                <div class = "item">
+                    {% if user.is_authenticated %}
+                    <a class = "item-link">{{request.user}}</a>
+                    <button class = "btn-logout">
+                        <a href = "/logout/">Logout</a>
+                    </button>
+                    {% else %}
+                    <a class = "item-link" href = "/login">Login</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+{% block body %}
+
+{% endblock %}
+{% block js %}
+<script src = "/static/js/script.js"></script>
+{% endblock %}
+</body>
+</html>

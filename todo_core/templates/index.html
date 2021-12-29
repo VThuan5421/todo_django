@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Todo app{% endblock %}
+{% block body %}
+<div class = "container main-body">
+    <button id = "toTop" title = "Go to Top">Top</button>
+    <div class = "card">
+        <div class = "top-part">
+            <div class = "day">
+                <h5 class = "setdate">Sunday, December 25</h5>
+                <h6 class = "settime">--</h6>
+                <p><span class = "numtask">{% if count > 0 %}{{count}}{% else %}0{% endif %}</span> Active Tasks</p>
+            </div>
+            <div class = "tasks">
+                <h6>
+                    Have a nice day&nbsp;&nbsp;
+                    <i style = "font-size: 20px;" class="fas fa-smile-beam"></i>
+                </h6>
+            </div>
+        </div>
+        <form method = "POST">
+            {% csrf_token %}
+            <div class = "addtask">
+                <textarea placeholder= "Enter a task..." name = "title"></textarea>
+                {% if user.is_authenticated %}
+                <button class = "btn btn-submit">Add task</button>
+                {% endif %}
+            </div>
+        </form>
+        <div class = "overflow-y">
+        <ul class = "added_tasks">
+            {% if not user.is_authenticated %}
+            {% for i in tasks %}
+            <li>
+                <div class = "info">
+                    <div class = "datetime">
+                        <p>{{i.1}}</p>
+                    </div>
+                </div>
+                <div class = "content">
+                    <div class = "title-task">
+                        <p>{{i.0}}</p>
+                    </div>
+                </div>
+                <div class = "function">
+                    <span class = "author"><p>By {{i.2}}</p></span>
+                </div>
+            </li>
+            {% endfor %}
+            {% else %}
+            {% for i in task %}
+            <li>
+                <div class = "info">
+                    <div class = "datetime"><p>{{i.2}}</p></div>
+                </div>
+                <div class = "content">
+                    <p>{{i.1}}</p>
+                </div>
+                <div class = "function">
+                    {% if user.is_authenticated %}
+                    <a href = "/edit_task/{{i.0}}/" class = "btn-edit"><i class = "fa fa-edit"></i></a>
+                    <a href = "/delete_task/{{i.0}}/" class = "btn-rm"><i class = "fa fa-trash"></i></a>
+                    {% endif %}
+                </div>
+            </li>
+            {% endfor %}
+            {% endif %}
+        </ul>
+    </div>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+<script src = "/static/js/script.js"></script>
+<script>
+    {% if overweight %}
+    alert("The paragraph too long. Less than 200 characters allowed.")
+    {% endif %}
+
+    // Khi người dùng cuộn chuột thì gọ hàm scrollFunction
+    window.onscroll = function() {
+        scrollFunction();
+    };
+    // Khai báo hàm scrollFunction
+    function scrollFunction() {
+        // Kiểm tra vị trí hiện tại của con trỏ so với nội dung trang
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("toTop").style.display = "block";
+        } else {
+            document.getElementById("toTop").style.display = "none";
+        }
+    }
+        // Gán sự kiện click cho button
+    document.getElementById("toTop").addEventListener("click", function() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    });
+</script>
+{% endblock %}
