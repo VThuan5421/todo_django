@@ -6,7 +6,7 @@ Todo app using Django backend
 /*After download code, unzip and follow below*/
 
 1. **Open cmd or window powershell**
-2. **Go to project folder.** Ex: cd ./path/to/todo_app-main
+2. **Go to project folder.** Ex: cd ./path/to/todo_django-main
 3. **Create virtual environment**
 - python -m venv env **or** py -m venv env
 4. **Run virtual environment**
