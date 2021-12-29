@@ -16,4 +16,4 @@ Todo app using Django backend
 6. **Run server**
 - python manage.py runserver
 
- ![image](/static.screen.png)
+ ![Screenshot](/static/screen.png)
